@@ -45,10 +45,9 @@ public class GlideEngine implements ImageEngine {
         Glide.with(context)
                 .asBitmap() // some .jpeg files are actually gif
                 .load(uri)
-                .apply(new RequestOptions()
-                        .override(resize, resize)
-                        .placeholder(placeholder)
-                        .centerCrop())
+                .placeholder(placeholder)
+                .override(resize, resize)
+                .centerCrop()
                 .into(imageView);
     }
 
@@ -58,10 +57,9 @@ public class GlideEngine implements ImageEngine {
         Glide.with(context)
                 .asBitmap() // some .jpeg files are actually gif
                 .load(uri)
-                .apply(new RequestOptions()
-                        .override(resize, resize)
-                        .placeholder(placeholder)
-                        .centerCrop())
+                .placeholder(placeholder)
+                .override(resize, resize)
+                .centerCrop()
                 .into(imageView);
     }
 
@@ -108,10 +106,8 @@ public class GlideEngine implements ImageEngine {
         Glide.with(context)
                 .asGif()
                 .load(uri)
-                .apply(new RequestOptions()
-                        .override(resizeX, resizeY)
-                        .priority(Priority.HIGH)
-                        .fitCenter())
+                .override(resizeX, resizeY)
+                .priority(Priority.HIGH)
                 .into(imageView);
     }
 

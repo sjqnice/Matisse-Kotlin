@@ -17,6 +17,7 @@ package com.zhihu.matisse.sample;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -40,7 +41,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.engine.impl.PicassoEngine;
 import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
@@ -65,9 +65,11 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         new ActivityResultContracts.StartActivityForResult(),
         new ActivityResultCallback<ActivityResult>() {
             @Override public void onActivityResult(ActivityResult result) {
-                Intent data = result.getData();
-                mAdapter.setData(Matisse.obtainResult(data), Matisse.obtainPathResult(data));
-                Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
+                if (Activity.RESULT_OK == result.getResultCode()) {
+                    Intent data = result.getData();
+                    mAdapter.setData(Matisse.obtainResult(data), Matisse.obtainPathResult(data));
+                    Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data)));
+                }
             }
         });
     @Override
@@ -146,7 +148,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                         .maxSelectable(9)
                         .originalEnable(true)
                         .maxOriginalSize(10)
-                        .imageEngine(new PicassoEngine())
+                        .imageEngine(new GlideEngine())
                         .forResult(pickerLauncher);
                 break;
             case R.id.only_gif:
