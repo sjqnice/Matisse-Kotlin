@@ -79,7 +79,7 @@ class SampleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.capture -> matisse!!.performCapture(
                 CaptureStrategy(
                     true,
-                    "com.zhihu.matisse.sample.fileprovider",
+                    "com.zhihu.matisse.sample.kt.fileprovider",
                     "test"
                 ), captureLauncher
             )
@@ -91,7 +91,7 @@ class SampleActivity : AppCompatActivity(), View.OnClickListener {
                 .captureStrategy(
                     CaptureStrategy(
                         true,
-                        "com.zhihu.matisse.sample.fileprovider",
+                        "com.zhihu.matisse.sample.kt.fileprovider",
                         "test"
                     )
                 )
