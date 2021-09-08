@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
-import com.zhihu.matisse.internal.loader.AlbumLoader.Companion.newInstance
+import com.zhihu.matisse.internal.loader.AlbumLoader
 import java.lang.ref.WeakReference
 
 class AlbumCollection : LoaderManager.LoaderCallbacks<Cursor> {
@@ -24,7 +24,7 @@ class AlbumCollection : LoaderManager.LoaderCallbacks<Cursor> {
             Log.e("AlbumCollection", "Require context.")
         }
         loadFinished = false
-        return newInstance(context)
+        return AlbumLoader.newInstance(context)
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {

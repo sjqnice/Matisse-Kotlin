@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.zhihu.matisse.internal.entity.Album
-import com.zhihu.matisse.internal.loader.AlbumMediaLoader.Companion.newInstance
+import com.zhihu.matisse.internal.loader.AlbumMediaLoader
 import java.lang.ref.WeakReference
 
 class AlbumMediaCollection : LoaderManager.LoaderCallbacks<Cursor> {
@@ -24,11 +24,7 @@ class AlbumMediaCollection : LoaderManager.LoaderCallbacks<Cursor> {
             Log.e("AlbumCollection", "Require album arguments.")
         }
         val isCaptureEnabled = args?.getBoolean(ARGS_ENABLE_CAPTURE, false) ?: false
-        return newInstance(
-            context,
-            album,
-            album.isAll && isCaptureEnabled
-        )
+        return AlbumMediaLoader.newInstance(context, album, album.isAll && isCaptureEnabled)
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {

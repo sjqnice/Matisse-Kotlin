@@ -10,12 +10,8 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.loader.content.CursorLoader
 import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.MimeType.Companion.isImage
-import com.zhihu.matisse.MimeType.Companion.isVideo
 import com.zhihu.matisse.internal.entity.Album
-import com.zhihu.matisse.internal.entity.SelectionSpec.onlyShowGif
-import com.zhihu.matisse.internal.entity.SelectionSpec.onlyShowImages
-import com.zhihu.matisse.internal.entity.SelectionSpec.onlyShowVideos
+import com.zhihu.matisse.internal.entity.SelectionSpec
 import java.util.*
 
 /**
@@ -154,10 +150,8 @@ class AlbumLoader private constructor(
     companion object {
         const val COLUMN_URI = "uri"
         const val COLUMN_COUNT = "count"
-
         private const val COLUMN_BUCKET_ID = "bucket_id"
         private const val COLUMN_BUCKET_DISPLAY_NAME = "bucket_display_name"
-
         private val QUERY_URI = MediaStore.Files.getContentUri("external")
         private val COLUMNS = arrayOf(
             MediaStore.Files.FileColumns._ID,
@@ -233,21 +227,21 @@ class AlbumLoader private constructor(
             val selection: String
             val selectionArgs: Array<String>
             when {
-                onlyShowGif -> {
+                SelectionSpec.onlyShowGif -> {
                     selection = if (beforeAndroidTen()) SELECTION_FOR_SINGLE_MEDIA_GIF_TYPE
                     else SELECTION_FOR_SINGLE_MEDIA_GIF_TYPE_29
                     selectionArgs = getSelectionArgsForSingleMediaGifType(
                         MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
                     )
                 }
-                onlyShowImages -> {
+                SelectionSpec.onlyShowImages -> {
                     selection = if (beforeAndroidTen()) SELECTION_FOR_SINGLE_MEDIA_TYPE
                     else SELECTION_FOR_SINGLE_MEDIA_TYPE_29
                     selectionArgs = getSelectionArgsForSingleMediaType(
                         MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
                     )
                 }
-                onlyShowVideos -> {
+                SelectionSpec.onlyShowVideos -> {
                     selection = if (beforeAndroidTen()) SELECTION_FOR_SINGLE_MEDIA_TYPE
                     else SELECTION_FOR_SINGLE_MEDIA_TYPE_29
                     selectionArgs = getSelectionArgsForSingleMediaType(
@@ -268,8 +262,8 @@ class AlbumLoader private constructor(
                 cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)
             )
             val contentUri: Uri = when {
-                isImage(mimeType) -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                isVideo(mimeType) -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                MimeType.isImage(mimeType) -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                MimeType.isVideo(mimeType) -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
                 else -> MediaStore.Files.getContentUri("external")
             }
             return ContentUris.withAppendedId(contentUri, id)

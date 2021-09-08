@@ -42,9 +42,11 @@ class MediaSelectionFragment : Fragment(), AlbumMediaCallbacks,
             throw IllegalStateException("Context must implement SelectionProvider.")
         }
 
-        when (context) {
-            is CheckStateListener -> onCheckStateListener = context
-            is OnMediaClickListener -> onMediaClickListener = context
+        if (context is CheckStateListener) {
+            onCheckStateListener = context
+        }
+        if (context is OnMediaClickListener) {
+            onMediaClickListener = context
         }
     }
 
@@ -114,12 +116,10 @@ class MediaSelectionFragment : Fragment(), AlbumMediaCallbacks,
     }
 
     override fun onMediaClick(album: Album?, item: Item, adapterPosition: Int) {
-        if (onMediaClickListener != null) {
-            onMediaClickListener!!.onMediaClick(
-                requireArguments().getParcelable(EXTRA_ALBUM),
-                item, adapterPosition
-            )
-        }
+        onMediaClickListener?.onMediaClick(
+            requireArguments().getParcelable(EXTRA_ALBUM),
+            item, adapterPosition
+        )
     }
 
     fun refreshMediaGrid() {

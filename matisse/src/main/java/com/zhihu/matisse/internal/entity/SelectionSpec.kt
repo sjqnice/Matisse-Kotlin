@@ -3,9 +3,6 @@ package com.zhihu.matisse.internal.entity
 import android.content.pm.ActivityInfo
 import androidx.annotation.StyleRes
 import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.MimeType.Companion.ofGif
-import com.zhihu.matisse.MimeType.Companion.ofImage
-import com.zhihu.matisse.MimeType.Companion.ofVideo
 import com.zhihu.matisse.R
 import com.zhihu.matisse.engine.ImageEngine
 import com.zhihu.matisse.engine.impl.GlideEngine
@@ -50,13 +47,13 @@ object SelectionSpec {
         get() = orientation != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     val onlyShowImages: Boolean
-        get() = showSingleMediaType && ofImage().containsAll(mimeTypeSet!!)
+        get() = showSingleMediaType && MimeType.ofImage().containsAll(mimeTypeSet!!)
 
     val onlyShowVideos: Boolean
-        get() = showSingleMediaType && ofVideo().containsAll(mimeTypeSet!!)
+        get() = showSingleMediaType && MimeType.ofVideo().containsAll(mimeTypeSet!!)
 
     val onlyShowGif: Boolean
-        get() = showSingleMediaType && ofGif() == mimeTypeSet
+        get() = showSingleMediaType && MimeType.ofGif() == mimeTypeSet
 
     private fun reset() {
         mimeTypeSet = null

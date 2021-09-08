@@ -5,9 +5,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Parcelable
 import android.provider.MediaStore
-import com.zhihu.matisse.MimeType.Companion.isGif
-import com.zhihu.matisse.MimeType.Companion.isImage
-import com.zhihu.matisse.MimeType.Companion.isVideo
+import com.zhihu.matisse.MimeType
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -23,9 +21,9 @@ data class Item(
     val contentUri: Uri
 
     val isCapture: Boolean get() = id == ITEM_ID_CAPTURE
-    val isImage: Boolean get() = isImage(mimeType)
-    val isGif: Boolean get() = isGif(mimeType)
-    val isVideo: Boolean get() = isVideo(mimeType)
+    val isImage: Boolean get() = MimeType.isImage(mimeType)
+    val isGif: Boolean get() = MimeType.isGif(mimeType)
+    val isVideo: Boolean get() = MimeType.isVideo(mimeType)
 
     init {
         val contentUri = when {

@@ -93,7 +93,7 @@ class MatisseActivity : AppCompatActivity(), AlbumCallbacks,
                 val ta = theme.obtainStyledAttributes(intArrayOf(R.attr.album_element_color))
                 val color = ta.getColor(0, 0)
                 ta.recycle()
-                if (Build.VERSION.SDK_INT >= 29) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     navigationIcon.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
                 } else {
                     navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)

@@ -13,7 +13,6 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.zhihu.matisse.R
 import com.zhihu.matisse.internal.entity.IncapableCause
-import com.zhihu.matisse.internal.entity.IncapableCause.Companion.handleCause
 import com.zhihu.matisse.internal.entity.Item
 import com.zhihu.matisse.internal.entity.SelectionSpec
 import com.zhihu.matisse.internal.model.SelectedItemCollection
@@ -292,7 +291,7 @@ abstract class BasePreviewActivity : AppCompatActivity(),
 
     private fun assertAddSelection(item: Item): Boolean {
         val cause: IncapableCause? = selectedCollection.isAcceptable(item)
-        handleCause(this, cause)
+        IncapableCause.handleCause(this, cause)
         return cause == null
     }
 
