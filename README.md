@@ -17,7 +17,7 @@ allprojects {
 
 Step 2. Add the dependency
 dependencies {
-    implementation 'com.github.sjqnice:Matisse-Kotlin:v1.0'
+    implementation 'com.github.sjqnice:Matisse-Kotlin:1.0.0'
 }
 ```
 ### picker
