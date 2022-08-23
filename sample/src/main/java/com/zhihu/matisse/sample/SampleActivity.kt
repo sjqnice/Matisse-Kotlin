@@ -85,7 +85,6 @@ class SampleActivity : AppCompatActivity(), View.OnClickListener {
             )
             R.id.zhihu -> Matisse.from(this@SampleActivity)
                 .choose(MimeType.ofImage(), false)
-                .showSingleMediaType(true)
                 .countable(true)
                 .capture(true)
                 .captureStrategy(
@@ -107,7 +106,6 @@ class SampleActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 })
                 .showSingleMediaType(true)
-                .originalEnable(true)
                 .maxOriginalSize(10)
                 .autoHideToolbarOnSingleTap(true)
                 .setOnCheckedListener(object : OnCheckedListener {
